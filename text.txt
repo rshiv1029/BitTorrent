@@ -1,0 +1,40 @@
+Generalized Notes on BitTorrent
+
+What is BitTorrent?
+BitTorrent is a P2P protocol for distributing files.
+
+P2P:    
+    P2P stands for peer to peer which is unlike the normal client-server model. In P2P, every peer/participant 
+    has the same capabilities. Peers can upload and download to one another.
+
+Torrent Files are broken up into pieces
+
+Torrent File consists of:
+SHA1 Hash (for validation)
+Info (Filename)
+Announce (Tracker URL)
+Piece Length
+
+Swarm: set of nodes/users getting a file
+Tracker: Central server in the hybrid P2P model that keeps track of who is in the swarm, tracker is notified when a node joins
+Seeder (Original Downloader): nodes in the swarm that have 100% of the torrent file, in the swarm to distribute the torrent file; Seeders only upload because they have nothing to download. 
+Leecher (End User): nodes in the swarm that do not have the complete torrent file, in the swarm to obtain the full file, can become a seeder once they have 100% of the file (can choose to stay in swarm or leave)
+
+Peer protocol
+4 Total States: choked, unchoked, interested, not interested
+Choked: Node is not giving data
+Interested: Node is interested if another node has a piece that it does not have
+
+Ex. Node P0 and P1
+Data flows from P0 to P1 if and only if:
+P0 is interested in P1 and P1 is not choking P0
+
+All nodes are initialized as choking and not interested
+
+Piece Selection Algorithm:
+
+The goal of the algorithm is to replicate all the pieces of the torrent file. 
+
+The first piece to download is chosen randomly to quickly create a piece replica and participate in uploading as a leecher.
+After the first piece it chooses the rarest piece among the seeders and leechers that are uploading.
+Last piece isn't done by rarest, request is sent to all peers, so fastest peer sends it. 

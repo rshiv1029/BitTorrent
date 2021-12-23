@@ -1,0 +1,4 @@
+- Add option for compact response format in the command line (in starter.py)
+- Add select functionality for recieving messages from peers
+
+- Extra Credit: Add UDP tracker functionality (in tracker.py)
