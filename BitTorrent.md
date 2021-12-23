@@ -19,7 +19,7 @@ The only thing thing you won’t find in the unofficial spec is how to form a re
 ## [High Level Explanation 1](www.morehawes.co.uk/the-bittorrent-protocol) 
 A very good high level explanation of the bittorrent protocol.
 
-## [High Level Explanation 2](www.kristenwidman.com/blog/33/how-to-write-a-bittorrent-client-part-1)
+## [High Level Explanation 2](www.kristenwidman.com/blog/33/how-to-write-a-bittorrent-client-part-1) 
 Another good high level explanation.
 
 ## [BEP for Peer ID conventions](www.bittorrent.org/beps/bep_0020.html) 
