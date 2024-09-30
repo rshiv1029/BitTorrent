@@ -54,8 +54,9 @@ class startTorrent(object):
             elif opt == '-l':
                 self.locals = True
 
-        # print("Torrent file is " + str(torrent_path))
-        self.torrent.main(torrent_path)    
+        print("Torrent file is " + str(torrent_path))
+        self.torrent.main(torrent_path) 
+        print(f"announce: {self.torrent.announce}")   
         self.tracker.main(compact)
 
         # for peer in self.tracker.peers:

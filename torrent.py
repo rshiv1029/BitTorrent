@@ -45,7 +45,7 @@ class Torrent(object):
         # Decode the torr string
         # This will Bdecode and parse the information into a dictionary d 
         data = bencodepy.decode(torr)
-        
+        # print(data)
 
         # Populate the Torrent object
         self.torrent_file = data
@@ -58,14 +58,14 @@ class Torrent(object):
         # Grab the info from the dictionary and hash it
         # Also convert it to %nn format
         # Test encoding with print(percent_encoded('123456789a'))
-        hashed_info = str(self.percent_encoded(sha1(bencodepy.bencode(data[b'info'])).hexdigest()))
+        hashed_info = str(self.percent_encoded(sha1(bencodepy.encode(data[b'info'])).hexdigest()))
         self.info_hash = hashed_info
-        self.info_hash_bytes = bytearray(sha1(bencodepy.bencode(data[b'info'])).digest())
-        # print("hashed_info: ", hashed_info)
+        self.info_hash_bytes = bytearray(sha1(bencodepy.encode(data[b'info'])).digest())
+        print("hashed_info: ", hashed_info)
         
         peer_id = str(self.generate_peer_id())
         self.peer_id = peer_id
-        
+        print(f"params: {vars(self)}")
         # peer_id = percent_encoded(peer_id)
         # print("peer_id: ", peer_id)
 

@@ -36,6 +36,7 @@ class Tracker(object):
         return str(ip_address[0]) + "." + str(ip_address[1]) + "." + str(ip_address[2])+ "." + str(ip_address[3]).strip()
 
     def http_client_to_tracker(self,torrent):
+        print("entering http flow")
         # port is in range of 6881 to 6889
         params = {
             'info_hash': torrent.info_hash,
@@ -51,13 +52,15 @@ class Tracker(object):
         
         # Grab the torrent announce and split it so we can grab the ip address 
         arr = torrent.announce.split("/")
-        trunc_url = arr[2][:-5]
+        
+        trunc_url = arr[2]
+        print(f"url: {trunc_url}")
         trunc_announce = arr[3]
         ip_addy = socket.gethostbyname(trunc_url)
-
+        print(f"ip: {ip_addy}")
         
         #print(target_host)
-        target_port = 6969
+        target_port = 51414
         # Create socket
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -108,6 +111,8 @@ class Tracker(object):
         self.response_len = len(response)
         response_split = response.split(b'\r\n\r\n')
         response_decode = bencodepy.decode(response_split[1])
+        print(response_split)
+        print(response_decode)
         self.complete = response_decode[b'complete']
         self.incomplete = response_decode[b'incomplete']
         self.interval = response_decode[b'interval']
@@ -134,7 +139,8 @@ class Tracker(object):
             peer_dict = response_decode[b'peers']
             # iterate thru the list of peers
             for p in peer_dict:
-                peer_id = p[b'peer_id']
+                print(p[b'peer id'])
+                peer_id = p[b'peer id']
                 peer_ip = p[b'ip']
                 peer_port = p[b'port']
                 # print("Checking for duplicates of '", peer_ip,"' ")
